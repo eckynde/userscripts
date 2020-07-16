@@ -10,10 +10,12 @@
 // @include  https://servicedesk/*
 // @include  https://servicedesk.hgroup.intra/*
 // @license  GPL-3.0-or-later; http://www.gnu.org/licenses/gpl-3.0.txt
-// @icon     http://servicedesk/images/favicon.ico
 // @grant    none
 // @author   Jan Dunker
 // ==/UserScript==
+
+// OpenUser.js can't handle this url
+// @icon     http://servicedesk/images/favicon.ico
 
 // SETTINGS
 // EINSTELLUNGEN
