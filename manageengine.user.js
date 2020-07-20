@@ -339,18 +339,6 @@ function update(){
   } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
     setTitle("Vorlage auswählen","Select Template");
   
-  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
-    setTitle("Vorlage auswählen","Select Template");
-  
-  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
-    setTitle("Vorlage auswählen","Select Template");
-  
-  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
-    setTitle("Vorlage auswählen","Select Template");
-  
-  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
-    setTitle("Vorlage auswählen","Select Template");
-  
   } else if (document.title === defaulttabtitle) { //Fallback nur Default
     setTitle(fallbacktitle);
     
