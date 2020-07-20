@@ -4,12 +4,15 @@
 // @description Find the right tab instantly: Useful title with the ticket no and title or with information you choose
 // @description:de-DE Endlich sofort den richtigen Tab finden: Nützlicher Titel mit Ticketnr. und Betreff oder selbst gewählten Informationen 
 // @namespace jandunker
-// @version  1.0
+// @version  1.1
 // @include  http://servicedesk/*
 // @include  http://servicedesk.hgroup.intra/*
 // @include  https://servicedesk/*
 // @include  https://servicedesk.hgroup.intra/*
 // @license  GPL-3.0-or-later; http://www.gnu.org/licenses/gpl-3.0.txt
+// @copyright 2020, eckende (https://openuserjs.org/users/eckende)
+// @updateURL https://openuserjs.org/meta/eckende/Tab_Titles_for_ticket_system_ManageEngine_ServiceDesk_Plus.meta.js
+// @downloadURL https://openuserjs.org/install/eckende/Tab_Titles_for_ticket_system_ManageEngine_ServiceDesk_Plus.user.js
 // @grant    none
 // @author   Jan Dunker
 // ==/UserScript==
@@ -155,12 +158,12 @@ var defaulttabtitle = "ManageEngine ServiceDesk Plus";
 // END OF SETTINGS
 // ENDE EINSTELLUNGEN
 
-// getElementById wirh handling
+// getElementById with handling
 function getById(id){
   var elem = document.getElementById(id);
   if (elem) {
-    if (elem.innerText != "") return elem.innerText;
-    else return elem.title;
+    if (elem.innerText.trim() != "") return elem.innerText.trim();
+    else return elem.title.trim();
   }
   else {
     console.log('[UserScript Tab Titles] "' + id + '" not found, returning "' + emptyfield + '" instead. Try document.getElementById("' + id + '")');
@@ -169,21 +172,43 @@ function getById(id){
 }
 
 
+// get using data-name  with handling
+function getByDataName(name){
+  var elem = null;
+  let data = document.querySelectorAll("[data-name]");
+  for (let i=0; i<data.length; i++) {
+     if(name == data[i].dataset.name) {
+       elem = data[i];
+       break;
+     }
+  }
+  if (elem) {
+    if (elem.innerText.trim() != "") return elem.innerText.trim();
+    else return elem.title.trim();
+  }
+  else {
+    console.log('[UserScript Tab Titles] "' + name + '" not found, returning "' + emptyfield + '" instead.');
+  	return emptyfield;
+  }
+}
+
+
 //Funktionen Ticket
 //lazy functions
-function getFieldTicket_ticket_id() {return getById("requestId");}                  //Ticketnummer
-function getFieldTicket_ticket_status() {return getById("STATUSID_CUR");}           //Ticketstatus (Open/Closed/On Hold)
-function getFieldTicket_ticket_title() {return getById("requestSubject_ID");}       //Betreff
-function getFieldTicket_ticket_technician() {return getById("OWNERID_CUR");}        //Techniker/Bearbeiter
-function getFieldTicket_ticket_group() {return getById("QUEUEID_CUR");}             //Gruppe
-function getFieldTicket_ticket_requester() {return getById("REQUESTERID_RCUR");}    //Anforderer
-function getFieldTicket_ticket_site() {return getById("SITEID_CUR");}               //Standort
-function getFieldTicket_ticket_category() {return getById("CATEGORYID_CUR");}       //Kategorie
-function getFieldTicket_ticket_subcategory() {return getById("SUBCATEGORYID_CUR");} //Unterkategorie
-function getFieldTicket_ticket_element() {return getById("ITEMID_CUR");}            //Element
+function getFieldTicket_ticket_id() {return getById("requestId");}                      //Ticketnummer
+function getFieldTicket_ticket_status() {return getById("status-right-panel");}         //Ticketstatus (Open/Closed/On Hold)
+function getFieldTicket_ticket_title() {return getById("req-subject");}                 //Betreff
+function getFieldTicket_ticket_technician() {return getById("technician-right-panel");} //Techniker/Bearbeiter
+function getFieldTicket_ticket_group() {return getById("group-right-panel");}           //Gruppe
+function getFieldTicket_ticket_requester() {return getById("userName");}                //Anforderer
+function getFieldTicket_ticket_priority() {return getById("priority-right-panel");}     //Priorität
+function getFieldTicket_ticket_site() {return getByDataName("site");}                   //Standort
+function getFieldTicket_ticket_category() {return getByDataName("category");}           //Kategorie
+function getFieldTicket_ticket_subcategory() {return getByDataName("subcategory");}     //Unterkategorie
+function getFieldTicket_ticket_element() {return getByDataName("item");}                //Element
 
 function titleTicket(){
-  setTitle(ticketstring.replace("%ticket_id%",getFieldTicket_ticket_id).replace("%ticket_title%",getFieldTicket_ticket_title).replace("%ticket_technician%",getFieldTicket_ticket_technician).replace("%ticket_site%",getFieldTicket_ticket_site).replace("%ticket_group%",getFieldTicket_ticket_group).replace("%ticket_status%",getFieldTicket_ticket_status).replace("%ticket_requester%",getFieldTicket_ticket_requester).replace("%ticket_category%",getFieldTicket_ticket_category).replace("%ticket_subcategory%",getFieldTicket_ticket_subcategory).replace("%ticket_element%",getFieldTicket_ticket_element).replace("%custom1%",getFieldTicket_custom1).replace("%custom2%",getFieldTicket_custom2).replace("%custom3%",getFieldTicket_custom3).replace("%custom4%",getFieldTicket_custom4).replace("%custom5%",getFieldTicket_custom5));
+  setTitle(ticketstring.replace("%ticket_id%",getFieldTicket_ticket_id).replace("%ticket_title%",getFieldTicket_ticket_title).replace("%ticket_technician%",getFieldTicket_ticket_technician).replace("%ticket_site%",getFieldTicket_ticket_site).replace("%ticket_group%",getFieldTicket_ticket_group).replace("%ticket_status%",getFieldTicket_ticket_status).replace("%ticket_requester%",getFieldTicket_ticket_requester).replace("%ticket_category%",getFieldTicket_ticket_category).replace("%ticket_subcategory%",getFieldTicket_ticket_subcategory).replace("%ticket_element%",getFieldTicket_ticket_element).replace("%ticket_priority%",getFieldTicket_ticket_priority).replace("%custom1%",getFieldTicket_custom1).replace("%custom2%",getFieldTicket_custom2).replace("%custom3%",getFieldTicket_custom3).replace("%custom4%",getFieldTicket_custom4).replace("%custom5%",getFieldTicket_custom5));
 }
 
 //Funktionen Task
@@ -336,5 +361,4 @@ function update(){
   //console.log("[UserScript Tab Titles] Done.");
 }
 update();
-
 if (updateinterval > 50) window.setInterval(update, updateinterval);
