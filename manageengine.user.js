@@ -252,103 +252,103 @@ function setTitle(str1, str2){
 function update(){
   //console.log("[UserScript Tab Title] Executing...");
   var url = location.href;
-  if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/WorkOrder\.do\?(?:.*&)?woMode=viewWO/)){ //Ticket
+    if (url.match(/^https?:\/\/[\w\d.-]*\/WorkOrder\.do\?(?:.*&)?woMode=viewWO/)){ //Ticket
     titleTicket();
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/TaskDetails\.cc/)){ //Task
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/TaskDetails\.cc/)){ //Task
     if (document.getElementById("Task_TITLE")) titleTask();
     else titleTasklist();
     
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/WOListView\.do/)){ //Ticketübersicht
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/WOListView\.do/)){ //Ticketübersicht
     titleTicketlist();
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/SearchN\.do/)){ //Suche -> List/Ticket
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/SearchN\.do/)){ //Suche -> List/Ticket
     if (document.getElementById("requestId")) titleTicket();
     else if (document.getElementById("Task_TITLE")) titleTask(); //Just in case
     else titleTicketlist();
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/WOAdvListView\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/WOAdvListView\.do/)){
     setTitle("Erweiterte Ticketsuche","Advanced Ticket Search");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/WOAdvancedSearch\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/WOAdvancedSearch\.do/)){
     setTitle("Erweiterte Ticketsuche","Advanced Ticket Search");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/HomePage\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/HomePage\.do/)){
     setTitle("Home");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/DashBoard\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/DashBoard\.do/)){
     setTitle("Dashboard");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/Problems\.cc/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/Problems\.cc/)){
     setTitle("Probleme","Problems");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/SolutionsHome\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/SolutionsHome\.do/)){
     setTitle("Lösungen","Solutions");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/Templates\.do/)){ //Ticket-Vorlagen
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/Templates\.do/)){ //Ticket-Vorlagen
     setTitle("Vorlagen","Templates");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/ListViewFilter\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ListViewFilter\.do/)){
     setTitle("Ansichten verwalten","Manage Views");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/AddNewProblem\.cc/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/AddNewProblem\.cc/)){
     setTitle("Neues Problem erstellen","Create New Problem");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/WorkOrder\.do(?:$|\?reqTemplate=)/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/WorkOrder\.do(?:$|\?reqTemplate=)/)){
     setTitle("Neue Anforderung erstellen","Create New Ticket");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/TaskDefAction\.do/)){ //Neue Aufgabe erstellen
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/TaskDefAction\.do/)){ //Neue Aufgabe erstellen
     setTitle("Neue Aufgabe erstellen","Create New Task");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/AddNewProblem\.cc/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/AddNewProblem\.cc/)){
     setTitle("Neues Problem erstellen","Create New Problem");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/AddSolution\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/AddSolution\.do/)){
     setTitle("Lösung hinzufügen","Add Solution");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/SearchRequester\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/SearchRequester\.do/)){
     setTitle("Anforderer auswählen","Select Requester");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/(?:AllReminders\.do|jsp\/Reminder\.jsp|ReminderDisplay\.do)/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/(?:AllReminders\.do|jsp\/Reminder\.jsp|ReminderDisplay\.do)/)){
     setTitle("Erinnerungen","Reminders");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/(?:Announce|AnnounceShow)\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/(?:Announce|AnnounceShow)\.do/)){
     setTitle("Ankündigungen","Announcements");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/calendar\//)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/calendar\//)){
     setTitle("Kalender","Calendar");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/TopicAction\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/TopicAction\.do/)){
     setTitle("Themen verwalten","Manage Topics");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/ImportXLSSolution\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ImportXLSSolution\.do/)){
     setTitle("Lösung importieren","Import Solution");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/AssociateCIList\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/AssociateCIList\.do/)){
     setTitle("Assets auswählen","Select Assets");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/SiteLookup\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/SiteLookup\.do/)){
     setTitle("Standort auswählen","Select Site");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/ShowTaskTemplateList\.cc/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
     setTitle("Vorlage auswählen","Select Template");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/UserAssets\.do/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/UserAssets\.do/)){
     setTitle("Benutzer Assets","User Assets");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/ShowTaskTemplateList\.cc/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
     setTitle("Vorlage auswählen","Select Template");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/ShowTaskTemplateList\.cc/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
     setTitle("Vorlage auswählen","Select Template");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/ShowTaskTemplateList\.cc/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
     setTitle("Vorlage auswählen","Select Template");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/ShowTaskTemplateList\.cc/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
     setTitle("Vorlage auswählen","Select Template");
   
-  } else if (url.match(/^https?:\/\/servicedesk(?:\.hgroup\.intra)?\/ShowTaskTemplateList\.cc/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/ShowTaskTemplateList\.cc/)){
     setTitle("Vorlage auswählen","Select Template");
   
   } else if (document.title === defaulttabtitle) { //Fallback nur Default
