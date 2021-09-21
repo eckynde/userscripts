@@ -4,7 +4,7 @@
 // @description Find the right tab instantly: Useful title with the ticket no and title or with information you choose
 // @description:de-DE Endlich sofort den richtigen Tab finden: Nützlicher Titel mit Ticketnr. und Betreff oder selbst gewählten Informationen 
 // @namespace jandunker
-// @version  1.1
+// @version  1.2
 // @include  http://servicedesk/*
 // @include  http://servicedesk.hgroup.intra/*
 // @include  https://servicedesk/*
@@ -197,7 +197,7 @@ function getByDataName(name){
 //lazy functions
 function getFieldTicket_ticket_id() {return getById("requestId");}                      //Ticketnummer
 function getFieldTicket_ticket_status() {return getById("status-right-panel");}         //Ticketstatus (Open/Closed/On Hold)
-function getFieldTicket_ticket_title() {return getById("req-subject");}                 //Betreff
+function getFieldTicket_ticket_title() {return getById("req_subject");}                 //Betreff
 function getFieldTicket_ticket_technician() {return getById("technician-right-panel");} //Techniker/Bearbeiter
 function getFieldTicket_ticket_group() {return getById("group-right-panel");}           //Gruppe
 function getFieldTicket_ticket_requester() {return getById("userName");}                //Anforderer
@@ -294,7 +294,7 @@ function update(){
   } else if (url.match(/^https?:\/\/[\w\d.-]*\/AddNewProblem\.cc/)){
     setTitle("Neues Problem erstellen","Create New Problem");
   
-  } else if (url.match(/^https?:\/\/[\w\d.-]*\/WorkOrder\.do(?:$|\?reqTemplate=)/)){
+  } else if (url.match(/^https?:\/\/[\w\d.-]*\/WorkOrder\.do\?woMode=newWO/)){
     setTitle("Neue Anforderung erstellen","Create New Ticket");
   
   } else if (url.match(/^https?:\/\/[\w\d.-]*\/TaskDefAction\.do/)){ //Neue Aufgabe erstellen
