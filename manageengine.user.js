@@ -4,7 +4,7 @@
 // @description       Find the right tab instantly: Useful title with the ticket no and title or with information you choose
 // @description:de-DE Endlich sofort den richtigen Tab finden: Nützlicher Titel mit Ticketnr. und Betreff oder selbst gewählten Informationen 
 // @namespace         jandunker
-// @version           1.4
+// @version           1.5
 // @match             http://servicedesk/*
 // @match             http://servicedesk.hgroup.intra/*
 // @match             https://servicedesk/*
@@ -923,7 +923,7 @@ function customizeUI(){
 // SVG Embed
 // Embedding SVG can be done in many ways - here it's done by inserting the svg element into the html. This way, text can be selected and copied.
 function embedSVG(){
-    if (document.getElementById('ik_screenshot') && document.getElementById('ik_screenshot').children.length > 0 && document.getElementById('ik_screenshot').children[0].tagName == 'P' && document.querySelector('a[download^=Screenshot_]')) {
+    if (document.querySelector('a[download^=Screenshot_]') && document.getElementById('desc-content').innerText.match(/\[IK_SupportMail\]\s*$/) && !document.getElementById('ik_screenshot')) {
 
         if (logLevel > 0) console.time('embedSVG_all');
         if (logLevel > 1) console.time('embedSVG_prepare');
@@ -936,10 +936,6 @@ function embedSVG(){
         if (lang == 0) embeddingErrorMsg = 'Nachträgliches Einbetten des Screenshots fehlgeschlagen. Stattdessen den Anhang öffnen.'
         else embeddingErrorMsg = 'Dynamic embedding of the screenshot failed. Open the attachment instead.';
 
-        // we move the container (div) from the mail body to a separate section (for looks)
-        // remove container at current position
-        document.getElementById('ik_screenshot').parentNode.removeChild(document.getElementById('ik_screenshot'));
-
         // create new ik_screenshot container
         let section = document.createElement('template');
         section.innerHTML = '<div id="desc-ik_screenshot" class="atp-container-target atp-container m0 p10 clearfix"><p class="sb">Screenshot</p><hr class="mt0"><div id="ik_screenshot"></div></div>';
@@ -951,7 +947,6 @@ function embedSVG(){
 
         // until SVG file is replaced, show 'Loading...'
         document.getElementById('ik_screenshot').innerHTML = 'Loading...';
-        //document.getElementById('ik_screenshot').innerHTML = '<object type="image/svg+xml" data="' + url + '"><img src="' + url + '" /></object>';
 
         if (logLevel > 1) console.time('embedSVG_download');
         // fetch SVG file and insert contents into the container
